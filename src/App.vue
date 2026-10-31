@@ -2,6 +2,7 @@
 import { computed, ref } from 'vue'
 import { useRoute, RouterLink, RouterView } from 'vue-router'
 import { Activity, Bot, ChartNoAxesCombined, CircleUserRound, ClipboardPlus, HeartPulse, House, Menu, Settings, Utensils, X } from 'lucide-vue-next'
+import ThemeToggle from './components/ThemeToggle.vue'
 
 const route = useRoute()
 const mobileMenu = ref(false)
@@ -45,7 +46,11 @@ const nav = [
       <header class="topbar">
         <button class="menu-button icon-button" type="button" aria-label="打开导航" @click="mobileMenu = true"><Menu /></button>
         <div><span class="eyebrow">2026 年 10 月 18 日 · 星期日</span><h1>{{ title }}</h1></div>
+        <div class="topbar-actions">
+         <!-- 主题按钮使用独立组件，避免把主题状态耦合到主布局。 -->
+         <ThemeToggle />
         <RouterLink to="/settings" class="avatar" aria-label="打开设置">林</RouterLink>
+        </div>
       </header>
       <RouterView v-slot="{ Component }">
         <Transition name="page" mode="out-in"><component :is="Component" /></Transition>
